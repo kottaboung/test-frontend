@@ -1,18 +1,12 @@
-
-<main class="main">
-  <div class="container mt-5">
-    
-    <h1 class="text-primary">users</h1>
-    <ul>
-      <li *ngFor="let item of user">
-        {{ item.name }} - {{ item.email }}
-      </li>
-      
-    </ul>
-    <button class="btn btn-success">click me</button>
-      
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" style="z-index: 1030; border-radius: 0 0 4px 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+  <div class="container-fluid">
+    <div>
+      <a class="navbar-brand" style="cursor: pointer;" (click)="goHome()">Home</a>
+    </div>
+    <div>
+      <button class="btn btn-light" (click)="goLogin()">Login</button>
+    </div>
   </div>
-</main>
+</nav>
 
-
-<router-outlet />
+<router-outlet></router-outlet>
