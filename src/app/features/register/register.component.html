@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center align-items-center vh-100"
+     style="background: linear-gradient(130deg, #5b8df9, #9c7ff9, #c084fc);">
+  <div class="bg-white rounded shadow p-5" style="min-width: 350px; max-width: 500px; width: 100%;">
+    <h3 class="mb-4 text-center">Register</h3>
+    
+    <form>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email">
+      </div>
+      <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password">
+      </div>
+        <div class="mb-4">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+        </div>
+
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary w-50 me-2" (click)="goLogin()">Login</button>
+        <button type="submit" class="btn btn-primary w-50 me-2">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
