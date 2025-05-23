@@ -12,7 +12,7 @@ Navigate to `http://localhost:4200/`. The application will automatically reload 
 
 ```
 #Generate Component with route and module
-$ ng g c <component-name> --route app.route --module app.module
+$ ng g c <component-name> --route <name> --module app.module
 
 #Generate Service
 $ ng g s <service-name>
