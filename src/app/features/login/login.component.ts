@@ -36,12 +36,25 @@ export class LoginComponent implements OnInit {
       const { email, password } = this.form.value;
       this.authService.login({ email, password }).subscribe({
         next: () => {
-          this.modalTitle = 'Login success!';
-          this.isSuccess = true;
-          this.showModal = true;
+          this.authService.getMe().subscribe({
+            next: (user) => {
+              localStorage.setItem('currentUser', JSON.stringify(user));
+              this.authService.setCurrentUser(user);
+              console.log(user);
+              this.modalTitle = 'Login success!';
+              this.isSuccess = true;
+              this.showModal = true;
+            },
+            error: () => {
+              this.modalTitle = 'Error loading user profile';
+              this.modalMessage = 'Please try again.';
+              this.isSuccess = false;
+              this.showModal = true;
+            }
+          });
         },
         error: (err) => {
-          this.modalTitle = 'Login failed '
+          this.modalTitle = 'Login failed';
           this.modalMessage = err.error.message;
           this.isSuccess = false;
           this.showModal = true;
@@ -49,6 +62,7 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+
 
   onModalClose() {
     this.showModal = false;
