@@ -1,0 +1,8 @@
+<div class="modal-backdrop" *ngIf="show">
+  <div class="modal-content bg-white rounded shadow p-4 text-center" style="width: 40vh;">
+    <h4>{{ title }}</h4>
+    <p>{{ message }}</p>
+    <button class="btn btn-primary" (click)="onClose()">OK</button>
+  </div>
+</div>
+
