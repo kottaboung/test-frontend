@@ -2,24 +2,38 @@
      style="background: linear-gradient(130deg, #5b8df9, #9c7ff9, #c084fc);">
   <div class="bg-white rounded shadow p-5" style="min-width: 350px; max-width: 500px; width: 100%;">
     <h3 class="mb-4 text-center">Register</h3>
+
+    <app-loading-modal [show]="isLoading"></app-loading-modal>
+
+    <app-alert-modal
+      [show]="showModal"
+      [title]="modalTitle"
+      [message]="modalMessage"
+      (close)="onModalClose()"
+    ></app-alert-modal>
     
-    <form>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Enter name">
+        <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter name">
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter email">
+        <input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter email">
       </div>
       <div class="mb-4">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password">
+        <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password">
       </div>
         <div class="mb-4">
             <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
-        </div>
+            <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+      </div>
+
+      <div *ngIf="form.errors?.['mismatch'] && submitted" class="mb-4 text-danger">
+        Passwords do not match.
+      </div>
+
 
       <div class="d-flex justify-content-between">
         <button type="button" class="btn btn-secondary w-50 me-2" (click)="goLogin()">Login</button>
