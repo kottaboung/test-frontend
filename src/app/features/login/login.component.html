@@ -1,1 +1,30 @@
-<p>login works!</p>
+<div class="login-container d-flex justify-content-center align-items-center vh-100" 
+     style="background: linear-gradient(130deg, #5b8df9, #9c7ff9, #c084fc);">
+  
+  <div class="login-form bg-white p-5 rounded shadow" style="min-width: 350px; max-width: 480px; width: 100%;">
+    <h3 class="mb-4 text-center">Login</h3>
+
+    <form>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email">
+      </div>
+      
+      <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password">
+      </div>
+
+    <div class="d-grid mb-4">
+      <button type="button" class="btn btn-outline-danger">
+        <i class="bi bi-google me-2"></i> Login with Google
+      </button>
+    </div>
+
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary w-50 me-2" (click)="goRegister()">Register</button>
+        <button type="submit" class="btn btn-primary w-50 me-2 me-2">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
