@@ -19,6 +19,7 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./features/register/register.module').then(m => m.RegisterModule) 
   },
+  { path: 'setting', loadChildren: () => import('./features/setting/setting.module').then(m => m.SettingModule) },
 
   { path: '**', redirectTo: '/home' }
 ];

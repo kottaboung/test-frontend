@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { User } from '../interface/user';
+import { updateUser, User } from '../interface/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class AuthService {
 
   private API_URL = 'http://localhost:3000/auth';
   
-  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  private currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
   currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient) {
@@ -43,9 +43,28 @@ export class AuthService {
     this.currentUserSubject.next(user);
   }
 
+  updateCurrentUser(user: User | null) {
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.currentUserSubject.next(user);
+  }
+
+  updateProfile(data: updateUser) {
+  const token = localStorage.getItem('accessToken');
+  return this.http.patch<updateUser>(`${this.API_URL}/profile`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+}
+
   logout() {
+    const token = localStorage.getItem('accessToken');
+    this.http.post(`${this.API_URL}/logout`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).subscribe();
     localStorage.clear();
-    this.http.post(`${this.API_URL}/logout`, {}).subscribe();
     this.currentUserSubject.next(null);
   }
 
@@ -77,7 +96,7 @@ export class AuthService {
   }
 
   getRefreshToken() {
-  return localStorage.getItem('refreshToken');
+    return localStorage.getItem('refreshToken');
   }
 
 //   getMe(): Observable<any> {

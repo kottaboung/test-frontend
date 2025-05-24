@@ -37,6 +37,10 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  goSetting() {
+    this.router.navigate(['/setting']);
+  }
+
   logout() {
     this.authService.logout();
     localStorage.removeItem('currentUser'); // clear เฉพาะ currentUser

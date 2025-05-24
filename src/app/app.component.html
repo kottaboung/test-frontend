@@ -22,8 +22,7 @@
               {{ isLoggedIn ? 'Logout' : 'Login' }}
             </a>
           </li>
-          <li><a class="dropdown-item disabled" href="#">Register (coming soon)</a></li>
-          <li><a class="dropdown-item disabled" href="#">Settings</a></li>
+          <li><a class="dropdown-item" (click)="goSetting()">Settings</a></li>
         </ul>
       </div>
     </div>
@@ -45,7 +44,7 @@
             {{ isLoggedIn ? 'Logout' : 'Login' }}
           </a>
         </li>
-        <li><a class="dropdown-item disabled" href="#">Settings</a></li>
+        <li><a class="dropdown-item" (click)="goSetting()">Settings</a></li>
       </ul>
     </div>
   </div>
