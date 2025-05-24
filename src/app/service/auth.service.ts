@@ -31,7 +31,12 @@ export class AuthService {
   }
 
   getMe(): Observable<User> {
-    return this.http.get<User>(`${this.API_URL}/me`);
+    const token = this.getAccessToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<User>(`${this.API_URL}/me`, { headers });
   }
 
   setCurrentUser(user: User | null) {
@@ -55,6 +60,18 @@ export class AuthService {
       Authorization: `Bearer ${token}`
     }
   });
+}
+
+  loginWithGoogle(idToken: string) {
+  return this.http.post<{ tokens: { accessToken: string; refreshToken: string }, user: User }>(`${this.API_URL}/google`, { idToken }).pipe(
+    tap(res => {
+      localStorage.setItem('accessToken', res.tokens.accessToken);
+      localStorage.setItem('refreshToken', res.tokens.refreshToken);
+      // เก็บ user ด้วย
+      localStorage.setItem('currentUser', JSON.stringify(res.user));
+      this.currentUserSubject.next(res.user);
+    })
+  );
 }
 
   logout() {
